@@ -1,0 +1,58 @@
+import java.time.LocalDateTime
+
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.5'
+    id 'io.spring.dependency-management' version '1.1.4'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '21'
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
+
+
+    runtimeOnly 'com.h2database:h2'
+    compileOnly 'org.projectlombok:lombok'
+
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation ('org.springframework.boot:spring-boot-starter-test')
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+task generatePostsAndComments(){
+    File dataSQL = file("src/main/resources/data.sql")
+    dataSQL.write("")
+    //posts
+    for(int i = 1;i <=100;i++)
+    {
+        dataSQL.append("insert into post(id,title,content,created)" +
+                "values (${i},'Test post ${i}', 'Content ${i}','" + LocalDateTime.now().minusDays(100-i) + "' );\n")
+    }
+    //comments
+    for(int i = 1;i <=100;i++)
+    {
+        int postId = 1 + i /10
+        dataSQL.append("insert into comment(id,post_id,content,created) " +
+                "values (${i}, ${postId}, 'Comment ${i}','" + LocalDateTime.now().minusDays(100-i) + "' );\n")
+    }
+}
