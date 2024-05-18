@@ -1,6 +1,5 @@
-package com.example.demo.controller;
+package com.example.demo.controller.dto;
 
-import com.example.demo.controller.dto.PostDataTransferObject;
 import com.example.demo.model.Post;
 
 import java.util.List;
