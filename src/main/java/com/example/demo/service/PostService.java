@@ -4,6 +4,7 @@ import com.example.demo.model.Post;
 import com.example.demo.repository.PostRepository;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,9 +14,10 @@ import java.util.List;
 public class PostService {
 
     private final PostRepository postRepository;
+    private static final int pageSize = 20;
 
-    public List<Post> getPosts() {
-        return postRepository.findAll();
+    public List<Post> getPosts(int pageNumber) {
+        return postRepository.findAllPosts(PageRequest.of(pageNumber,pageSize));
     }
 
     public Post getSinglePost(long id) {

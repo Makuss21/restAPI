@@ -18,6 +18,9 @@ configurations {
         extendsFrom annotationProcessor
     }
 }
+compileJava {
+    options.compilerArgs << '-parameters'
+}
 
 repositories {
     mavenCentral()
