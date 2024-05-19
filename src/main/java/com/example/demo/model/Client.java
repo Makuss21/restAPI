@@ -12,13 +12,12 @@ import java.util.List;
 @Setter
 public class Client {
     @Id
-    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String firstName;
     private String lastName;
     private LocalDateTime created;
-
-    @OneToMany
-    @JoinColumn(name = "clientId")
+    @OneToMany(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "clientId", updatable = false, insertable = false)
     private List<Orders> orders;
 }

@@ -48,8 +48,8 @@ task generatePostsAndComments(){
     //clients
     for(int i = 1;i <=100;i++)
     {
-        dataSQL.append("insert into client(id,First_Name,Last_Name,created)" +
-                "values (${i},'First_Name ${i}', 'Last_Name ${i}','" + LocalDateTime.now().minusDays(100-i) + "' );\n")
+        dataSQL.append("insert into client(First_Name,Last_Name,created)" +
+                "values ('First_Name ${i}', 'Last_Name ${i}','" + LocalDateTime.now().minusDays(100-i) + "' );\n")
     }
     //orders
     for(int i = 1;i <=100;i++)
