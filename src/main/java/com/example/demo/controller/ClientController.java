@@ -6,10 +6,7 @@ import com.example.demo.model.Client;
 import com.example.demo.service.ClientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,5 +33,18 @@ public class ClientController {
     @GetMapping("/client/{id}")
     public Client getSingleClient(@PathVariable long id){
         return clientService.getSingleClient(id);
+    }
+
+    @PostMapping("/client")
+    public Client addClient(@RequestBody Client client){
+        return clientService.addClient(client);
+    }
+    @PutMapping("/client")
+    public Client updateClient(@RequestBody Client client){
+        return clientService.editClient(client);
+    }
+    @DeleteMapping("/client/{id}")
+    public void deleteClient(@PathVariable long id){
+        clientService.deleteClient(id);
     }
 }

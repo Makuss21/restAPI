@@ -4,6 +4,7 @@ import com.example.demo.model.Client;
 import com.example.demo.model.Orders;
 import com.example.demo.repository.OrderRepository;
 import com.example.demo.repository.ClientRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -47,5 +48,21 @@ public class ClientService {
         return ordersList.stream()
                 .filter(orders -> orders.getClientId() == id)
                 .toList();
+    }
+
+    public Client addClient(Client client) {
+        return clientRepository.save(client);
+    }
+
+    @Transactional
+    public Client editClient(Client client) {
+        Client c1 = clientRepository.findById(client.getId()).orElseThrow();
+        c1.setFirstName(client.getFirstName());
+        c1.setLastName(client.getLastName());
+        return c1;
+    }
+
+    public void deleteClient(long id) {
+        clientRepository.deleteById(id);
     }
 }
