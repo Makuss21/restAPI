@@ -10,15 +10,15 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class Post{
+public class Client {
     @Id
     @Column
     private long id;
-    private String title;
-    private String content;
+    private String firstName;
+    private String lastName;
     private LocalDateTime created;
 
     @OneToMany
-    @JoinColumn(name = "postId")
-    private List<Comment> comments;
+    @JoinColumn(name = "clientId")
+    private List<Orders> orders;
 }
