@@ -45,17 +45,17 @@ tasks.named('test') {
 task generatePostsAndComments(){
     File dataSQL = file("src/main/resources/data.sql")
     dataSQL.write("")
-    //posts
+    //clients
     for(int i = 1;i <=100;i++)
     {
-        dataSQL.append("insert into post(id,title,content,created)" +
-                "values (${i},'Test post ${i}', 'Content ${i}','" + LocalDateTime.now().minusDays(100-i) + "' );\n")
+        dataSQL.append("insert into client(id,First_Name,Last_Name,created)" +
+                "values (${i},'First_Name ${i}', 'Last_Name ${i}','" + LocalDateTime.now().minusDays(100-i) + "' );\n")
     }
-    //comments
+    //orders
     for(int i = 1;i <=100;i++)
     {
-        int postId = 1 + i /10
-        dataSQL.append("insert into comment(id,post_id,content,created) " +
-                "values (${i}, ${postId}, 'Comment ${i}','" + LocalDateTime.now().minusDays(100-i) + "' );\n")
+        int clientId = 1 + i /10
+        dataSQL.append("insert into orders(id,client_id,content,created) " +
+                "values (${i}, ${clientId}, 'Order Number ${i}','" + LocalDateTime.now().minusDays(100-i) + "' );\n")
     }
 }

@@ -1,18 +1,19 @@
-package com.example.demo.controller.dto;
+package com.example.demo.model;
 
 import jakarta.persistence.Entity;
-import lombok.Builder;
+import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+@Entity
 @Getter
-@Builder
-public class PostDataTransferObject {
+@Setter
+public class Orders {
+    @Id
     private long id;
-    private String title;
+    private long clientId;
     private String content;
     private LocalDateTime created;
-
 }
