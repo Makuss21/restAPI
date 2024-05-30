@@ -12,9 +12,6 @@ import java.util.List;
 public interface ClientRepository extends JpaRepository<Client, Long> {
 
 
-//    @Query("select p from Post p where p.title = :title")
-//    List<Post> findByTitle(@Param("title") String title);
-
     @Query("select C from Client C")
     List<Client> findAllClients(Pageable pageable);
 
